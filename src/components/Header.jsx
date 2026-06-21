@@ -36,7 +36,7 @@ function Header1() {
   </div>
 </div>
 
-        {/* Navigation */}
+    
         <ul className="hidden md:flex items-center gap-12">
           <li>
             <a
@@ -48,7 +48,7 @@ function Header1() {
               pb-1
               "
             >
-              Home
+               Trending
             </a>
           </li>
 
