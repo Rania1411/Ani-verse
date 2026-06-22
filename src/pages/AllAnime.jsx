@@ -1,6 +1,10 @@
 
 import React from 'react'
 import Search from "../components/Search.jsx";
+import Header from '../components/Header.jsx';  
+import{useState,useEffect} from'react'
+import Showmore from '../components/Showmore.jsx'
+import AnimeCard from"../components/AnimeCard.jsx"
 const BASE_URL = "https://api.jikan.moe/v4";
 const API_OPTIONS = {
   method: "GET",
@@ -9,43 +13,74 @@ const API_OPTIONS = {
   },
 };
 
-const allAnime = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-      const [errorMessage, setErrorMessage] = useState("");
-      const [animeList,setAnimeList]=useState([]);
-      const[isLoading,setLoading]=useState(false);
-      async function fetchAnime() {
-        setErrorMessage('')
-        setLoading(true)
-        try {
-       
-          const endpoint = `${BASE_URL}/anime/{id}/full`;
-          const response = await fetch(endpoint, API_OPTIONS);
-         
-          if (!response.ok) {
-            throw new Error(" failed to fetch anime");
-          }
-          const data = await response.json();
-          console.log(data);
-         if (!data.data || data.data.length === 0) {
-         console.log("No anime found");
-         setAnimeList([]);
-         return;
-      
-         }
-           setAnimeList(data.data||[])
-        } catch (error) {
-         console.log(`Error finding anime: ${error}`);
-         setErrorMessage(error.message);
-        }finally{
-          setLoading(false);
+  const AllAnime = () => {
+    const [page,setPage]=useState(1)
+    const [lastPage, setLastPage] = useState(1);
+     const[searchTerm,setSearchTerm]=useState("")
+     const[errorMsg,setErrorMsg]=useState('')
+     const[isLoading,setIsLoading]=useState(false);
+     const[animeList,setAnimeList]=useState([]);
+     const [debouncedSearch, setDebouncedSearch] = useState("");
+     useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedSearch(searchTerm);
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [searchTerm]);
+      async function fetchAllAnime () {
+        setErrorMsg('');
+        setIsLoading(true);
+        try{
+         const endpoint = debouncedSearch.trim()
+  ? `${BASE_URL}/anime?q=${debouncedSearch}&page=${page}&genres_exclude=12`
+  : `${BASE_URL}/anime?page=${page}&genres_exclude=12`;
+            const response = await fetch(endpoint, API_OPTIONS);
+          
+            if(!response.ok){
+               throw new Error(" failed to fetch anime");
+                }
+             const data=  await response.json();
+            if (!data.data || data.data.length === 0) {
+            console.log("No anime found");
+            setAnimeList([]);
+               }
+
+             setAnimeList(data.data.filter((anime)=> 
+              anime.rating !== "Rx - Hentai" &&
+               anime.rating !== "R+ - Mild Nudity")||[]);
+             setLastPage(data.pagination.last_visible_page);
+                     }
+                     catch(error ){
+                    console.log(`Error finding anime: ${error}`);
+                 setErrorMsg(error.message);
+              }
+    finally{
+      setIsLoading(false);
+    }
         }
-      }
+        useEffect(()=>
+          { fetchAllAnime()}
+          ,[page, debouncedSearch])
+ 
   return (
-    <div className='allanime'>
-  <Serach/>
+    <div className="allanime flex min-h-screen w-full bg-[url('/background.jpg')]  bg-[#030014]  bg-no-repeat  flex-col justify-start items-center  text-center  bg-cover bg-center">
+<Header/>
+<Search 
+searchTerm={searchTerm}
+setSearchTerm={setSearchTerm}
+   setPage={setPage}
+/>
+ <ul className=" flex flex-wrap justify-center gap-6 mt-8">
+   
+    {animeList.map((anime) => (
+    <AnimeCard key={anime.mal_id} anime={anime} />
+   ))}
+       </ul>
+
+<Showmore page={page}  setPage={setPage}
+  lastPage={lastPage}/>
     </div>
   )
 }
-
-export default allAnime
+export default AllAnime;

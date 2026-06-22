@@ -23,12 +23,10 @@ const Trending = () => {
    
       const endpoint = `${BASE_URL}/top/anime`;
       const response = await fetch(endpoint, API_OPTIONS);
-      console.log(response);
       if (!response.ok) {
         throw new Error(" failed to fetch anime");
       }
       const data = await response.json();
-      console.log(data);
      if (!data.data || data.data.length === 0) {
      console.log("No anime found");
      setAnimeList([]);
@@ -85,7 +83,7 @@ const Trending = () => {
        </ul>
       )}
       {filteredAnime.length === 0 && searchTerm && (
-  <p className="text-white">Anime not found in this list</p>
+  <p className="text-red-500 mb-5">Anime not found in this list</p>
 )}
        </section>
         </div>
