@@ -64,7 +64,19 @@ const API_OPTIONS = {
           ,[page, debouncedSearch])
  
   return (
-    <div className="allanime flex min-h-screen w-full bg-[url('/background.jpg')]  bg-[#030014]  bg-no-repeat  flex-col justify-start items-center  text-center  bg-cover bg-center">
+           <div className=" wrapper
+  flex
+  min-h-screen
+  w-full
+  bg-[url('/bg2.png')]
+  bg-center
+  bg-cover
+  bg-fixed
+  bg-no-repeat
+  flex-col
+  justify-start
+  items-center
+  text-center">
 <Header/>
 <Search 
 searchTerm={searchTerm}

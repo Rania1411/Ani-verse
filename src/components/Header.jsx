@@ -57,8 +57,8 @@ function Header() {
           </li>
 
           <li>
-            <NavLink to="/Featured" className={navLinkClass}>
-              Featured
+            <NavLink to="/Genres" className={navLinkClass}>
+              Genres
             </NavLink>
           </li>
 
