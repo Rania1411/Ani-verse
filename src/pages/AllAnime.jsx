@@ -3,8 +3,10 @@ import React from 'react'
 import Search from "../components/Search.jsx";
 import Header from '../components/Header.jsx';  
 import{useState,useEffect} from'react'
+ import Footer from"../components/Footer.jsx"
 import Showmore from '../components/Showmore.jsx'
-import AnimeCard from"../components/AnimeCard.jsx"
+import AnimeCard from"../components/AnimeCard.jsx" 
+import Spinner from "../components/Spinner.jsx" 
 const BASE_URL = "https://api.jikan.moe/v4";
 const API_OPTIONS = {
   method: "GET",
@@ -83,15 +85,24 @@ searchTerm={searchTerm}
 setSearchTerm={setSearchTerm}
    setPage={setPage}
 />
- <ul className=" flex flex-wrap justify-center gap-6 mt-8">
-   
+{isLoading ? (
+  <Spinner />
+) : (
+  <ul className="flex flex-wrap justify-center gap-6 mt-8">
     {animeList.map((anime) => (
-    <AnimeCard key={anime.mal_id} anime={anime} />
-   ))}
-       </ul>
+      <AnimeCard key={anime.mal_id} anime={anime} />
+    ))}
+  </ul>
+)}
 
-<Showmore page={page}  setPage={setPage}
-  lastPage={lastPage}/>
+<div className="mt-10 mb-0">
+    <Showmore
+        page={page}
+        setPage={setPage}
+        lastPage={lastPage}
+    />
+</div>
+<Footer/>
     </div>
   )
 }

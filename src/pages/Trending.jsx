@@ -4,6 +4,7 @@ import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
 import Spinner  from"../components/Spinner.jsx"
 import AnimeCard from"../components/AnimeCard.jsx"
+ import Footer from"../components/Footer.jsx"
 const BASE_URL = "https://api.jikan.moe/v4";
 const API_OPTIONS = {
   method: "GET",
@@ -98,7 +99,9 @@ const Trending = () => {
   <p className="text-red-500 mb-5">Anime not found in this list</p>
 )}
        </section>
+        <Footer/>
         </div>
+       
       </main>
     </>
   );
