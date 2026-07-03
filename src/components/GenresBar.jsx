@@ -42,60 +42,60 @@ bottom-6
   shadow-xl
   "
 >
-    <h3 className='bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent font-bold text-xl'>GENRES</h3>
-  <div className={genreItem} onClick={setSelectedGenre(1)}>
+    <h3 className='bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent font-bold text-xl l'>   GENRES</h3>
+  <div className={genreItem} onClick={()=>setSelectedGenre({mal_id:1,name:'Action'})}>
     <Swords />
   <h2>Action</h2>
   
 </div>
 
 <div className={genreItem} 
-onClick={() => setSelectedGenre(2)}>
+onClick={() => setSelectedGenre({mal_id:2,name:'Adventure'})}>
      < Compass />
   <h2>Adventure</h2>
 </div>
 
-<div className={genreItem}  onClick={() => setSelectedGenre(5)}>
+<div className={genreItem}  onClick={() => setSelectedGenre({mal_id:5,name:'Avant Garde'})}>
     <Sparkles />
   <h2>Avant Garde</h2>
 </div>
 
-<div className={genreItem}   onClick={() => setSelectedGenre(4)}>
+<div className={genreItem}   onClick={() => setSelectedGenre({mal_id:4,name:'Comedy'})}>
     <Laugh />
   <h2>Comedy</h2>
 </div>
 
-<div className={genreItem}  onClick={() => setSelectedGenre(8)}>
+<div className={genreItem}  onClick={() => setSelectedGenre({mal_id:8,name:'Darma'})}>
       <Drama />
   <h2>Drama</h2>
 </div>
 
-<div className={genreItem}   onClick={() => setSelectedGenre(10)}>
+<div className={genreItem}   onClick={() => setSelectedGenre({mal_id:10,name:'Fantasy'})}>
     <Sparkles/>
   <h2>Fantasy</h2>
 </div>
 
-<div className={genreItem}    onClick={() => setSelectedGenre(14)}>
+<div className={genreItem}    onClick={() => setSelectedGenre({mal_id:14,name:'Horror'})}>
     <Ghost  />
   <h2>Horror</h2>
 </div>
 
-<div className={genreItem}  onClick={() => setSelectedGenre(30)}>
+<div className={genreItem}  onClick={() => setSelectedGenre({mal_id:30,name:'Sports'})}>
       <Trophy />
   <h2>Sports</h2>
 </div>
 
-<div className={genreItem} onClick={() => setSelectedGenre(22)}>
+<div className={genreItem} onClick={() => setSelectedGenre({mal_id:22,name:'Romance'})}>
       <Heart />
   <h2>Romance</h2>
 </div>
 
-<div className={genreItem}     onClick={() => setSelectedGenre(7)}>
+<div className={genreItem}     onClick={() => setSelectedGenre({mal_id:7,name:'Detective'})}>
       <Search  />
   <h2>Detective</h2>
 </div>
 
-<div className={genreItem} onClick={() => setSelectedGenre(13)}>
+<div className={genreItem} onClick={() => setSelectedGenre({mal_id:13,name:'Historical<'})}>
      <Landmark />
   <h2>Historical</h2>
 </div>

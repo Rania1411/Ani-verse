@@ -16,13 +16,25 @@ const API_OPTIONS = {
 const Genres = () => {
   const [animeList, setAnimeList] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState({mal_id:1,name:'Action'});
+  const [hero,setHero]=useState(0);
+
+ const images=[
+  "/juju.jpg",
+  "/bleu.jpg",
+  "/fullmetal.jpg",
+  "/hunter.jpg",
+"/demon.jpg",
+"/naruto.jpg",
+"/tokyo.jpg"];
+const prevHero = hero === 0 ? images.length - 1 : hero - 1;
+const nextHero = (hero + 1) % images.length;
 
   async function fetchAnime() {
     setLoading(true);
 
     try {
-      const endpoint = `${BASE_URL}/anime?genres=${selectedGenre}&genres_exclude=9,12,49,58&order_by=score&sort=desc`;
+      const endpoint = `${BASE_URL}/anime?genres=${selectedGenre.mal_id}&genres_exclude=9,12,49,58&order_by=score&sort=desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
@@ -65,10 +77,10 @@ const Genres = () => {
         />
 
       
-        <div className="flex-1 ml-64 px-10 pb-12">
+        <div className="flex-1 ml-64 px-8 pb-12">
          
           <div
-            className="relative mt-8 h-[280px] overflow-hidden rounded-3xl border border-violet-500/20 shadow-2xl"
+            className="relative mt-8 h-[350px] overflow-hidden rounded-2xl border border-violet-500/20 shadow-2xl"
             style={{
               backgroundImage: "url('/genre-banner.jpg')",
               backgroundSize: "cover",
@@ -87,21 +99,153 @@ const Genres = () => {
                 Discover
               </p>
 
-              <h1 className="mt-3 text-5xl font-bold text-white">
-                Explore Anime
-                <br />
-                by Genre
-              </h1>
+          <h1 className="mt-3 text-4xl font-extrabold leading-tight text-white">
+  Discover
+  <span className="block bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+    Amazing Anime
+  </span>
+</h1>
 
-              <p className="mt-5 max-w-xl text-lg leading-8 text-gray-300">
-                Browse thousands of anime, discover hidden gems,
-                and find your next favorite series through every
+              <p className="mt-5 max-w-xl text-lg leading-8 text-gray-300 ">
+                Browse thousands of anime, 
+                discover hidden<br/>  gems,
+                and find your next favorite series through <br/>every
                 genre imaginable.
               </p>
             </div>
-          </div>
+  <div className="absolute right-8 top-1/2 -translate-y-1/2 w-[520px] h-[340px]">
 
-      
+ 
+  <img
+    src={images[prevHero]}
+    alt=""
+    className="
+      absolute
+      left-0
+      top-6
+      w-40
+      h-60
+      object-cover
+      rounded-2xl
+      opacity-40
+      rotate-[-14deg]
+      scale-100
+      blur-[1px]
+      transition-all
+      duration-500
+    "
+  />
+<div
+  className="
+    absolute
+    left-1/2
+    top-1/2
+    -translate-x-1/2
+    -translate-y-1/2
+    w-60
+    h-60
+    rounded-full
+    bg-violet-500/30
+    blur-[120px]
+  "
+/>
+
+  <img
+    src={images[hero]}
+    alt=""
+    className="
+    top-1
+      absolute
+      left-1/2
+      -translate-x-1/2
+      w-52
+      h-70
+      object-cover
+      rounded-3xl
+      shadow-[0_25px_60px_rgba(0,0,0,0.6)]
+      border-2
+      border-violet-500/30
+      z-20
+      transition-all
+      duration-500
+      animate-[float_4s_ease-in-out_infinite]
+    "
+  />
+
+ 
+  <img
+    src={images[nextHero]}
+    alt=""
+    className="
+      absolute
+      right-0
+      top-6
+      w-40
+      h-60
+      object-cover
+      rounded-2xl
+      opacity-40
+      rotate-[12deg]
+      scale-100
+      blur-[1px]
+      transition-all
+      duration-500
+    "
+  />
+</div>
+ 
+<div className="absolute bottom-6 left-164 -translate-x-1/2 z-30 flex gap-3">
+  {images.map((_, index) => (
+    <button
+      key={index}
+      onClick={() => setHero(index)}
+      className={`
+        transition-all
+        duration-300
+        rounded-full
+        ${
+          hero === index
+            ? "w-8 h-2 bg-violet-500"
+            : "w-2 h-2 bg-white/40 hover:bg-white"
+        }
+      `}
+    />
+  ))}
+</div>
+</div>
+<div  className="
+flex 
+ justify-center 
+ items-center
+    relative
+    top-5
+    h-14
+    w-60
+    mx-auto
+    rounded-xl
+    overflow-hidden
+    border
+    border-violet-500/30
+    bg-gradient-to-r
+    from-[#090817]
+    via-[#090817]
+    to-transparent
+
+    transition-all
+    duration-300
+    ease-in-out
+
+    hover:border-violet-400
+    hover:shadow-lg
+    hover:shadow-violet-500/20
+    hover:-translate-y-1
+    hover:scale-105
+  ">
+   <h2 className="text-2xl text-white text-center" 
+ >
+     {selectedGenre.name}
+</h2></div>
+ 
           <div className="mt-12">
             {isLoading ? (
               <Spinner />

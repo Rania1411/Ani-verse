@@ -42,13 +42,12 @@ export default function Footer() {
       title: "Trending",
       path: "/",
     },
-    {
-      title: "Top Anime",
-      path: "/top",
+    { title:"All Anime",
+      path:"/AllAnime"
     },
     {
       title: "Genres",
-      path: "/genres",
+      path: "/Genres",
     },
     {
       title: "Seasonal",
@@ -69,16 +68,12 @@ export default function Footer() {
       title: "Privacy",
       path: "/privacy",
     },
-    {
-      title: "Terms",
-      path: "/terms",
-    },
   ];
 
   const socials = [
     {
       icon: <FaGithub />,
-      url: "https://github.com/yourgithub",
+      url: "https://github.com/Rania1411/Ani-verse",
     },
     {
       icon: <FaDiscord />,
@@ -86,7 +81,7 @@ export default function Footer() {
     },
     {
       icon: <FaInstagram />,
-      url: "https://instagram.com/",
+      url: "https://www.instagram.com/_rania_1214/",
     },
   ];
 
@@ -237,7 +232,7 @@ export default function Footer() {
         </div>
 
       </div>
-            {/* Bottom */}
+        
 
       <div className="mt-20 border-t border-white/10 pt-8">
 

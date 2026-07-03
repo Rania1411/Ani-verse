@@ -63,8 +63,8 @@ function Header() {
           </li>
 
           <li>
-            <NavLink to="/About" className={navLinkClass}>
-              About
+            <NavLink to="/Seasonal" className={navLinkClass}>
+              Seasonal
             </NavLink>
           </li>
         </ul>
